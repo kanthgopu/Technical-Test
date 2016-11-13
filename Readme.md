@@ -20,3 +20,5 @@
 ## NOTE 
 Make sure you do 
 docker build, compose up before you run tests 
+
+docker-compose down && docker-compose up
