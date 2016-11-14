@@ -1,6 +1,7 @@
 package com.capgemini.hotels.page_objects;
 
 import com.capgemini.hotels.drivers.DriverHelpers;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -16,10 +17,6 @@ public class HomePage extends DriverHelpers {
 
     @FindBy(linkText = "Login")
     private WebElement loginLink;
-
-    @FindBy(css = ".col-sm-1>span")
-    private WebElement deleteBtn;
-
 
     @FindBy(id = "username")
     private WebElement userNameTxt;
@@ -55,9 +52,9 @@ public class HomePage extends DriverHelpers {
         PageFactory.initElements(driver, this);
     }
 
-    public void doLogin(String user, String password) {
+    public void doLogin(String username, String password) {
         loginLink.click();
-        userNameTxt.sendKeys(user);
+        userNameTxt.sendKeys(username);
         passwordTxt.sendKeys(password);
         submitBtn.click();
     }
@@ -72,15 +69,21 @@ public class HomePage extends DriverHelpers {
     }
 
     public List<String> isEntryFound() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         List<String> listOfHotels = new ArrayList<>();
         for (WebElement hotelName : entryList) {
             listOfHotels.add(hotelName.getText());
         }
         return listOfHotels;
-    }
+   }
 
-    public void deleteEntry(){
-        deleteBtn.click();
+    public void deleteEntry(int index) {
+        driver.navigate().refresh();
+        driver.findElement(By.id(""+index/4)).click();
     }
 
 }

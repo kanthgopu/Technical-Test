@@ -6,6 +6,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
+import java.util.List;
+
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.not;
 
@@ -25,22 +27,27 @@ public class Entry {
     }
 
     @When("^I provide \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-    public void i_provide(String hotelName, String address, String owner, String phone, String email) {
-        homePage.provideEntryDetails(hotelName, address, owner, phone, email);
+    public void i_provide(String hotelName, String address, String owner, String phoneNumber, String email) {
+       // if(!(homePage.isEntryFound().contains(hotelName))||homePage.isEntryFound().isEmpty())
+        homePage.provideEntryDetails(hotelName, address, owner, phoneNumber, email);
     }
 
-    @Then("^I should see \"([^\"]*)\" entry in the list$")
+    @Then("^I should see \"([^\"]*)\" in the list$")
     public void i_should_see_entry_in_the_list(String expectedEntry) {
-        Assert.assertThat(homePage.isEntryFound(),hasItem(expectedEntry));
-    }
-
-    @When("^I want to delete an entry$")
-    public void i_want_to_delete_an_entry()  {
-        homePage.deleteEntry();
+        Assert.assertThat(homePage.isEntryFound(), hasItem(expectedEntry));
     }
 
     @Then("^I should see the \"([^\"]*)\" is deleted$")
     public void I_should_see_the_is_deleted(String expected)  {
         Assert.assertThat(homePage.isEntryFound(),not(hasItem(expected)));
+
+    }
+
+    @When("^I want to delete an \"([^\"]*)\"$")
+    public void I_want_to_delete_an(String entry)  {
+        List<String> list=homePage.isEntryFound();
+        int index=list.indexOf(entry);
+        homePage.deleteEntry(index);
+
     }
 }
