@@ -4,10 +4,11 @@
         mvn clean test -Dbrowser=firefox -Durl=http://localhost:3003
   - IntellJ
     - Runner file in place 
-    - note go to run > edit config > in vm option apply this "-Dbrowser=firefox  -Durl=http://localhost:3003 "
+    - Note: go to run > edit config > in vm option apply this "-Dbrowser=firefox  -Durl=http://localhost:3003 "
   
 # Tools & Framework Used 
 
+- Docker Tool Box
 - Maven 
 - Cucumber 
 - Hamcrest
@@ -19,6 +20,6 @@
 
 ## NOTE 
 Make sure you do 
-docker build, compose up before you run tests 
+docker build, docker compose up before you run tests 
 
 docker-compose down && docker-compose up

@@ -18,8 +18,8 @@ Feature: Entry
     When I want to delete an "<entry>"
     Then I should see the "<entry>" is deleted
     Examples:
-     | entry |
-      | Ramada   |
+      | entry  |
+      | Ramada |
 
 
 

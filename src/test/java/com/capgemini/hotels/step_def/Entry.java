@@ -28,7 +28,6 @@ public class Entry {
 
     @When("^I provide \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
     public void i_provide(String hotelName, String address, String owner, String phoneNumber, String email) {
-       // if(!(homePage.isEntryFound().contains(hotelName))||homePage.isEntryFound().isEmpty())
         homePage.provideEntryDetails(hotelName, address, owner, phoneNumber, email);
     }
 
@@ -37,17 +36,18 @@ public class Entry {
         Assert.assertThat(homePage.isEntryFound(), hasItem(expectedEntry));
     }
 
-    @Then("^I should see the \"([^\"]*)\" is deleted$")
-    public void I_should_see_the_is_deleted(String expected)  {
-        Assert.assertThat(homePage.isEntryFound(),not(hasItem(expected)));
-
-    }
-
     @When("^I want to delete an \"([^\"]*)\"$")
-    public void I_want_to_delete_an(String entry)  {
-        List<String> list=homePage.isEntryFound();
-        int index=list.indexOf(entry);
+    public void I_want_to_delete_an(String entry) {
+        List<String> list = homePage.isEntryFound();
+        int index = list.indexOf(entry);
         homePage.deleteEntry(index);
 
     }
+
+    @Then("^I should see the \"([^\"]*)\" is deleted$")
+    public void I_should_see_the_is_deleted(String expected) {
+        Assert.assertThat(homePage.isEntryFound(), not(hasItem(expected)));
+
+    }
+
 }
